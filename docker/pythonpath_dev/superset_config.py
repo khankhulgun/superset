@@ -69,6 +69,13 @@ REDIS_RESULTS_DB = get_env_variable("REDIS_RESULTS_DB", "1")
 
 RESULTS_BACKEND = FileSystemCache("/app/superset_home/sqllab")
 
+BABEL_DEFAULT_LOCALE='mn'
+BABEL_DEFAULT_FOLDER='babel/translations'
+
+LANGUAGES = {
+    'en': {'flag': 'us', 'name': 'English'},
+    'mn': {'flag': 'mn', 'name': 'Монгол'},
+}
 
 class CeleryConfig(object):
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
