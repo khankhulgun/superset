@@ -24,13 +24,163 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import { styled } from '@superset-ui/core';
-import { ECharts, init } from 'echarts';
+import { ECharts, init, registerLocale } from 'echarts';
 import { EchartsHandler, EchartsProps, EchartsStylesProps } from '../types';
 
 const Styles = styled.div<EchartsStylesProps>`
   height: ${({ height }) => height};
   width: ${({ width }) => width};
 `;
+
+const localeObj = {
+  time: {
+    month: [
+      '1 сар',
+      '2 сар',
+      '3 сар',
+      '4 сар',
+      '5 сар',
+      '6 сар',
+      '7 сар',
+      '8 сар',
+      '9 сар',
+      '10 сар',
+      '11 сар',
+      '12 сар',
+    ],
+    monthAbbr: [
+      '1 сар',
+      '2 сар',
+      '3 сар',
+      '4 сар',
+      '5 сар',
+      '6 сар',
+      '7 сар',
+      '8 сар',
+      '9 сар',
+      '10 сар',
+      '11 сар',
+      '12 сар',
+    ],
+    dayOfWeek: ['Ням', 'Даваа', 'Мягмар', 'Лхагва', 'Пүрэв', 'Баасан', 'Бямба'],
+    dayOfWeekAbbr: [
+      'Ням',
+      'Даваа',
+      'Мягмар',
+      'Лхагва',
+      'Пүрэв',
+      'Баасан',
+      'Бямба',
+    ],
+  },
+  legend: {
+    selector: {
+      all: 'All',
+      inverse: 'Inv',
+    },
+  },
+  toolbox: {
+    brush: {
+      title: {
+        rect: 'Box Select',
+        polygon: 'Lasso Select',
+        lineX: 'Хэвтээгээр сонгох',
+        lineY: 'Босоогоор сонгох',
+        keep: 'Сонголтыг хадгалах',
+        clear: 'Арилгах',
+      },
+    },
+    dataView: {
+      title: 'Өгөгдөл харах',
+      lang: ['Өгөгдөл харах', 'Хаах', 'Сэргээх'],
+    },
+    dataZoom: {
+      title: {
+        zoom: 'Томруулах',
+        back: 'Дахин томруулах',
+      },
+    },
+    magicType: {
+      title: {
+        line: 'Шугаман диаграм руу шилжих',
+        bar: 'Бар диаграм руу шилжих',
+        stack: 'Стак',
+        tiled: 'Тайл',
+      },
+    },
+    restore: {
+      title: 'Сэргээх',
+    },
+    saveAsImage: {
+      title: 'Зураг болгон хадгалах',
+      lang: ['Зургийг хадгалахын тулд баруун товчийг дарна уу'],
+    },
+  },
+  series: {
+    typeNames: {
+      pie: 'Pie chart',
+      bar: 'Bar chart',
+      line: 'Line chart',
+      scatter: 'Scatter plot',
+      effectScatter: 'Ripple scatter plot',
+      radar: 'Radar chart',
+      tree: 'Tree',
+      treemap: 'Treemap',
+      boxplot: 'Boxplot',
+      candlestick: 'Candlestick',
+      k: 'K line chart',
+      heatmap: 'Heat map',
+      map: 'Map',
+      parallel: 'Parallel coordinate map',
+      lines: 'Line graph',
+      graph: 'Relationship graph',
+      sankey: 'Sankey diagram',
+      funnel: 'Funnel chart',
+      gauge: 'Gauge',
+      pictorialBar: 'Pictorial bar',
+      themeRiver: 'Theme River Map',
+      sunburst: 'Sunburst',
+    },
+  },
+  aria: {
+    general: {
+      withTitle: 'Графикийн талаар "{title}"',
+      withoutTitle: 'График',
+      // withoutTitle: 'This is a chart'
+    },
+    series: {
+      single: {
+        prefix: '',
+        withName: '{seriesName} нэртэй, {seriesType} төрөлтэй.',
+        withoutName: ' {seriesType} төрлийн.',
+      },
+      multiple: {
+        prefix: '. Энэ нь {seriesCount} цувралын тооноос бүрдэнэ.',
+        withName:
+          ' The {seriesId} series is a {seriesType} representing {seriesName}.',
+        withoutName: ' {seriesId} цуврал нь {seriesType}.',
+        separator: {
+          middle: '',
+          end: '',
+        },
+      },
+    },
+    data: {
+      allData: 'Өгөгдөл нь дараах байдалтай байна: ',
+      partialData: 'Эхний {displayCnt} нь: ',
+      // partialData: 'The first {displayCnt} items are: ',
+      withName: 'Өгөгдлийн {name}-д бол {value}',
+      // withName: 'the data for {name} is {value}',
+      withoutName: '{value}',
+      separator: {
+        middle: ', ',
+        end: '. ',
+      },
+    },
+  },
+};
+
+registerLocale('MN', localeObj);
 
 function Echart(
   {
@@ -58,7 +208,9 @@ function Echart(
   useEffect(() => {
     if (!divRef.current) return;
     if (!chartRef.current) {
-      chartRef.current = init(divRef.current);
+      chartRef.current = init(divRef.current, undefined, {
+        locale: 'MN',
+      });
     }
 
     Object.entries(eventHandlers || {}).forEach(([name, handler]) => {

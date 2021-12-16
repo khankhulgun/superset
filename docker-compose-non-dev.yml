@@ -23,7 +23,7 @@ x-superset-volumes: &superset-volumes
   - ./docker:/app/docker
   - superset_home:/app/superset_home
   - ./superset/translations:/app/superset/translations
-  - ./superset/assets:/app/superset/assets 
+  - ./superset/static/assets:/app/superset/static/assets 
 
 version: "3.7"
 services:

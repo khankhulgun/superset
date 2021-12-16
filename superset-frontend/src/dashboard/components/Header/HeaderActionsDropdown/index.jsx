@@ -26,7 +26,6 @@ import Icons from 'src/components/Icons';
 import { URL_PARAMS } from 'src/constants';
 import ShareMenuItems from 'src/dashboard/components/menu/ShareMenuItems';
 import CssEditor from 'src/dashboard/components/CssEditor';
-import RefreshIntervalModal from 'src/dashboard/components/RefreshIntervalModal';
 import SaveModal from 'src/dashboard/components/SaveModal';
 import injectCustomCss from 'src/dashboard/util/injectCustomCss';
 import { SAVE_TYPE_NEWDASHBOARD } from 'src/dashboard/util/constants';
@@ -207,8 +206,6 @@ class HeaderActionsDropdown extends React.PureComponent {
       userCanShare,
       userCanSave,
       isLoading,
-      refreshLimit,
-      refreshWarning,
       lastModifiedTime,
       addSuccessToast,
       addDangerToast,
@@ -276,16 +273,6 @@ class HeaderActionsDropdown extends React.PureComponent {
           {t('Refresh dashboard')}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key={MENU_KEYS.AUTOREFRESH_MODAL}>
-          <RefreshIntervalModal
-            refreshFrequency={refreshFrequency}
-            refreshLimit={refreshLimit}
-            refreshWarning={refreshWarning}
-            onChange={this.changeRefreshInterval}
-            editMode={editMode}
-            triggerNode={<span>{t('Set auto-refresh interval')}</span>}
-          />
-        </Menu.Item>
 
         {editMode &&
           filterboxMigrationState !== FILTER_BOX_MIGRATION_STATES.CONVERTED && (
@@ -317,14 +304,6 @@ class HeaderActionsDropdown extends React.PureComponent {
         {!editMode && (
           <Menu.Item key={MENU_KEYS.DOWNLOAD_AS_IMAGE}>
             {t('Download as image')}
-          </Menu.Item>
-        )}
-
-        {!editMode && (
-          <Menu.Item key={MENU_KEYS.TOGGLE_FULLSCREEN}>
-            {getUrlParam(URL_PARAMS.standalone)
-              ? t('Exit fullscreen')
-              : t('Enter fullscreen')}
           </Menu.Item>
         )}
       </Menu>
