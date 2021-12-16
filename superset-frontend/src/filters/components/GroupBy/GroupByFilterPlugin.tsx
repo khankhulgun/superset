@@ -21,7 +21,6 @@ import {
   ExtraFormData,
   getColumnLabel,
   t,
-  tn,
 } from '@superset-ui/core';
 import React, { useEffect, useState } from 'react';
 import { FormItemProps } from 'antd/lib/form';
@@ -78,9 +77,7 @@ export default function PluginFilterGroupBy(props: PluginFilterGroupByProps) {
   const columns = data ? withData : [];
 
   const placeholderText =
-    columns.length === 0
-      ? t('No columns')
-      : tn('%s option', '%s options', columns.length, columns.length);
+    columns.length === 0 ? t('No columns') : `${columns.length} сонголт`;
 
   const formItemData: FormItemProps = {};
   if (filterState.validateMessage) {

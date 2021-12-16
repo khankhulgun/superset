@@ -28,7 +28,6 @@ import {
   JsonObject,
   smartDateDetailedFormatter,
   t,
-  tn,
 } from '@superset-ui/core';
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { Select } from 'src/components';
@@ -251,9 +250,7 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
   }, [JSON.stringify(dataMask)]);
 
   const placeholderText =
-    data.length === 0
-      ? t('No data')
-      : tn('%s option', '%s options', data.length, data.length);
+    data.length === 0 ? t('No data') : `${data.length} Сонголт`;
 
   const formItemExtra = useMemo(() => {
     if (filterState.validateMessage) {

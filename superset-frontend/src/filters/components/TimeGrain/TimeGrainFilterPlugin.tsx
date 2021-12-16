@@ -21,7 +21,6 @@ import {
   ExtraFormData,
   t,
   TimeGranularity,
-  tn,
 } from '@superset-ui/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Select } from 'src/components';
@@ -87,9 +86,7 @@ export default function PluginFilterTimegrain(
   }, [JSON.stringify(filterState.value)]);
 
   const placeholderText =
-    (data || []).length === 0
-      ? t('No data')
-      : tn('%s option', '%s options', data.length, data.length);
+    (data || []).length === 0 ? t('No data') : `${data.length} сонголт`;
 
   const formItemData: FormItemProps = {};
   if (filterState.validateMessage) {

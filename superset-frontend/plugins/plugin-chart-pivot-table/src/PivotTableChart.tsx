@@ -29,6 +29,7 @@ import {
   useTheme,
 } from '@superset-ui/core';
 // @ts-ignore
+// eslint-disable-next-line import/order
 import PivotTable from '@superset-ui/react-pivottable/PivotTable';
 import {
   sortAs,

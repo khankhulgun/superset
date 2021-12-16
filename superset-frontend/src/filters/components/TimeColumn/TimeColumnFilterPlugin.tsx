@@ -21,7 +21,6 @@ import {
   ExtraFormData,
   GenericDataType,
   t,
-  tn,
 } from '@superset-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Select } from 'src/components';
@@ -79,7 +78,7 @@ export default function PluginFilterTimeColumn(
   const placeholderText =
     timeColumns.length === 0
       ? t('No time columns')
-      : tn('%s option', '%s options', timeColumns.length, timeColumns.length);
+      : `${timeColumns.length} сонголт`;
 
   const formItemData: FormItemProps = {};
   if (filterState.validateMessage) {
