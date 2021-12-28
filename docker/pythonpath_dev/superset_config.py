@@ -107,8 +107,7 @@ WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
 SQLLAB_CTAS_NO_LIMIT = True
 
 CSV_EXPORT = {
-    "encoding": "utf_8_sig",
-    "sep": ";"
+    "encoding": "utf_8_sig"
 }
 #
 # Optionally import superset_config_docker.py (which will have been included on
